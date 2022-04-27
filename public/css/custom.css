@@ -1,0 +1,5 @@
+.jumbotron{
+    background: linear-gradient(to bottom, rgba(250, 250, 250, 0), rgb(255, 255, 255)), url('/img/perrobanner.png') no-repeat center center;
+    width: 100%;
+    height: 100%;
+}
