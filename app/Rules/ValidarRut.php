@@ -27,7 +27,7 @@ class ValidarRut implements Rule
     {
         $this->logica();
 
-        return false;
+        return true;
     }
 
     /**

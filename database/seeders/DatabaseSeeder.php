@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             'apellido_paterno' => "Administrador",
             'telefono_movil' => "1",
             'direccion' => "1",
+            'status' => 1,
             'rut' => "123456",
             'email' => "admin@admin.cl",
             'password' => Hash::make("123456"),

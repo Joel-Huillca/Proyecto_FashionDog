@@ -15,7 +15,7 @@ class EstilistaController extends Controller
      */
     public function index()
     {
-        $estilistas = User::where('rol', 'estilista')->get();
+        $estilistas = User::where('rol', 'estilista')->simplePaginate(10);
         return view("administrador.estilista.index")->with("estilistas",$estilistas);
     }
 
@@ -39,7 +39,7 @@ class EstilistaController extends Controller
     {
         $request->validate([
             'nombre' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users', 'regex:/(.*)@(.*)\.(.*)/i'],
             'rut' => ['required', 'string', 'unique:users'],
         ]);
 
@@ -55,11 +55,12 @@ class EstilistaController extends Controller
             'email' => $request['email'],
             'password' => Hash::make($aleatorio),
             'rol' => "estilista",
+            'status' => 1
         ]);
 
         $estilistas = User::where('rol', 'estilista')->get();
 
-        return view('administrador.estilista.index')->with("estilistaCreado",true)->with("estilistas",$estilistas);
+        return redirect(route("estilista"))->with("estilistaCreado",true)->with("estilistas",$estilistas);
     }
 
     /**

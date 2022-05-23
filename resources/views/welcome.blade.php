@@ -33,7 +33,7 @@
 
         @error('rut')
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>{{ $message }}</strong>
+                <strong>{{ "El rut no existe en la base de datos" }}</strong>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -49,6 +49,11 @@
             </div>
         @enderror
 
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
 
         <main>
             <section class="hero" style="padding-top: 0">

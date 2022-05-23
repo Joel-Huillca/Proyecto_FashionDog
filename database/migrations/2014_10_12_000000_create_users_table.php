@@ -22,6 +22,7 @@ return new class extends Migration
             $table->enum('rol', ['cliente', 'estilista', 'administrativo'])->default('cliente');
             $table->string('rut')->unique();
             $table->string('email')->unique();
+            $table->tinyInteger('status'); //0: deshabilitado 1: habilitado
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
