@@ -47,4 +47,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function solicitudesCliente()
+    {
+        return $this->hasMany(Solicitud::class, "cliente_id");
+    }
+
+    public function solicitudesEstilista()
+    {
+        return $this->hasMany(Solicitud::class, "estilista_id");
+    }
+
+    public static function getUserNameById($id)
+    {
+        return User::where('id', $id)->pluck('nombre')->first();
+    }
 }
