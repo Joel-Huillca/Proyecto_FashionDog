@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\EstilistaController;
 use App\Http\Controllers\HabilitarUsuarioController;
+use App\Http\Controllers\SolicitudController;
+use App\Models\Solicitud;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +31,10 @@ Route::middleware(['rutasEstilista'])->group(function () {
     Route::get('/usuario', [HabilitarUsuarioController::class,'index'])->name('usuario');
     Route::get('/usuario/{id}', [HabilitarUsuarioController::class,'updateStatus'])->name('cambiarEstado');
 });
+
+Route::get('/servicio',[SolicitudController::class,'index'])->name('solicitud');
+Route::get('/servicio/create', [SolicitudController::class,'create'])->name('crear_solicitud');
+Route::post('/servicio/create', [SolicitudController::class,'store'])->name('crear_solicitud_post');
 
 
 Auth::routes();

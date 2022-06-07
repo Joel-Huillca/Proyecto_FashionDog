@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Solicitud;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class SolicitudController extends Controller
 {
@@ -14,7 +16,8 @@ class SolicitudController extends Controller
      */
     public function index()
     {
-        //
+        $solicitudes = Auth::user()->solicitudesCliente()->orderBy('fecha_solicitud')->orderBy('hora_solicitud')->simplePaginate(10);
+        return view('cliente.index')->with('solicitudes',$solicitudes);
     }
 
     /**
@@ -24,7 +27,7 @@ class SolicitudController extends Controller
      */
     public function create()
     {
-        //
+        return view('cliente.servicio');
     }
 
     /**
@@ -35,7 +38,25 @@ class SolicitudController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $date = date($request->fecha_solicitud);
+        $time = date($request->hora_solicitud);
+        $solicitudes = Auth::user()->solicitudesCliente()->get('fecha_solicitud');
+
+        foreach ($solicitudes as $solicitud) {
+            if ($solicitud->fecha_solicitud == $date) {
+                throw ValidationException::withMessages(['fecha_solicitud' => 'Ya existe solicitud para la fecha '. $date]);
+            }
+        }
+
+        Solicitud::create([
+            'fecha_solicitud' => $date,
+            'hora_solicitud' => $time,
+            'estado' => "INGRESADA",
+            'cliente_id' => Auth::user()->id,
+        ]);
+
+        return redirect(route('home'));
     }
 
     /**

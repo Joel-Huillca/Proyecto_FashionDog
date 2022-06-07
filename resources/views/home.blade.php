@@ -35,6 +35,15 @@
                                         <div class="card-body text-center">
                                             <h5 class="card-title">Solicitar servicio</h5>
                                             <p class="card-text"><i class="fa-solid fa-clock fa-2xl"></i></p>
+                                            <a href="/servicio/create" class="btn btn-primary">Ir</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="card">
+                                        <div class="card-body text-center">
+                                            <h5 class="card-title">Administrar Solicitudes</h5>
+                                            <p class="card-text"><i class="fa-solid fa-gear fa-2xl"></i></p>
                                             <a href="/servicio" class="btn btn-primary">Ir</a>
                                         </div>
                                     </div>
